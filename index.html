@@ -3,26 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock with Days</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Modern Clock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sleep-orange': '#ff4d00',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <main>
-        <div id="container">
-            <div id="clock">
-                <h1 id="timeElement"></h1>
+<body class="bg-black min-h-screen flex items-center justify-center p-4">
+    <!-- Username Display -->
+    <div class="absolute top-4 text-white text-xl font-light tracking-wide border border-sleep-orange/30 px-6 py-2 rounded-full bg-gradient-to-br from-gray-800/10 to-transparent backdrop-blur-sm">
+        Welcome, <span id="username">User</span>
+    </div>
+    <div class="bg-black rounded-3xl p-8 shadow-lg w-[500px] min-h-[500px] text-white border border-gray-700/50 bg-gradient-to-br from-gray-800/10 to-transparent backdrop-blur-sm mt-16">
+        <!-- Date -->
+        <div class="text-left mb-2">
+            <span id="dayName" class="text-lg font-light tracking-wide">Tuesday</span>
+            <span id="dayNumber" class="text-lg font-light ml-1">17</span>
+        </div>
+
+        <!-- Time -->
+        <div class="text-6xl font-light mb-6 flex items-baseline">
+            <span id="hours" class="font-mono tracking-wider">08</span>
+            <span class="mx-1">:</span>
+            <span id="minutes" class="font-mono tracking-wider">26</span>
+            <span id="seconds" class="text-2xl ml-1 text-gray-500 font-mono">43</span>
+        </div>
+
+        <!-- Todo List -->
+        <div class="mb-6">
+            <div class="flex justify-between text-sm mb-2">
+                <span>Todo List</span>
+                <button id="addTodo" class="text-sleep-orange hover:text-orange-400 transition-colors">+ Add Task</button>
             </div>
-            <div id="days">
-                <span id="sunday" class="day">sunday</span>
-                <span id="monday" class="day">monday</span>
-                <span id="tuesday" class="day">tuesday</span>
-                <span id="wednesday" class="day">wednesday</span>
-                <span id="thursday" class="day">thursday</span>
-                <span id="friday" class="day">friday</span>
-                <span id="saturday" class="day">saturday</span>
+            <div class="space-y-2" id="todoList">
+                <!-- Todo items will be added here dynamically -->
+            </div>
+            <div class="mt-2">
+                <input type="text" id="newTodoInput" placeholder="Enter new task" class="w-full bg-gray-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sleep-orange hidden border-2 border-red-500">
             </div>
         </div>
-    </main>
+
+        <!-- Days Container -->
+        <div class="mb-6">
+            <div class="flex justify-between text-sm mb-2">
+                <span>Days</span>
+            </div>
+            <div class="flex gap-2 flex-wrap" id="daysContainer">
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="sunday">Sun</button>
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="monday">Mon</button>
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="tuesday">Tue</button>
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="wednesday">Wed</button>
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="thursday">Thu</button>
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="friday">Fri</button>
+                <button class="px-4 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors" data-day="saturday">Sat</button>
+            </div>
+        </div>
+
+        <!-- Temperature and Network Status -->
+        <div class="flex justify-between items-center">
+            <span class="text-2xl font-light">25°C</span>
+            <div class="flex gap-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div id="clock"></div>
+        <div id="days"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
